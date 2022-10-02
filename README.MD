@@ -1,4 +1,4 @@
-# Image Gallery App - Changed TestUsers
+# Image Gallery App - Added Client to IDP
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -17,46 +17,27 @@ This application is the base from which we will start constructing and consuming
 ✅ The only positive point is that we're running over https <br/>
 
 ## Changes
-- Changed IDP `TestUsers.cs`:
+- Added to `Config.Clients`:
     ```csharp
-    public static List<TestUser> Users = new List<TestUser>
+    new()
     {
-        new TestUser{
-            SubjectId = "b6f7a7b1-f403-4434-8dac-8495ddd1f36e",
-            Username = "Frank",
-            Password = "password",
-            Claims = new List<Claim>{
-                new Claim("given_name", "Frank"),
-                new Claim("family_name", "Underwood")
-            }
+        ClientName = "ImageGallery",
+        ClientId = "imagegalleryclient",
+        AllowedGrantTypes = GrantTypes.Code,
+        RequirePcke = false,
+        RedirectUris = new List<string>()
+        {
+            "https://localhost:44389/signin-oidc"
         },
-        new TestUser{
-            SubjectId = "b99748a7-ee9c-4e05-8c71-784dda2d2e87",
-            Username = "Claire",
-            Password = "password",
-            Claims = new List<Claim>{
-                new Claim("given_name", "Claire"),
-                new Claim("family_name", "Underwood")
-            }
+        AllowedScopes =
+        {
+            IdentityServerConstants.StandardScopes.OpenId,
+            IdentityServerConstants.StandardScopes.Profile
         },
-    };
-    ```
-- Add Testusers to `IDP Services`:
-    ```csharp
-    public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
-    {
-        ...
-        .AddInMemoryClients(Config.Clients)
-        .AddTestUsers(TestUsers.Users);
-        ...
+        ClientSecrets =
+        {
+            new Secret("secret".Sha256())
+        },
+        RequireConsent = true
     }
-    ```
-- Add Profile to `Config.IdentityResources`:
-    ```csharp
-    public static IEnumerable<IdentityResource> IdentityResources =>
-    new IdentityResource[]
-    {
-        new IdentityResources.OpenId(),
-        new IdentityResources.Profile()
-    };
     ```

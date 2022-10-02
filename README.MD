@@ -1,4 +1,4 @@
-# Image Gallery App - No Security
+# Image Gallery App - Added IDP Project
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -15,3 +15,11 @@ This application is the base from which we will start constructing and consuming
 ❌ We are able to see images of all the users <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>
 ✅ The only positive point is that we're running over https <br/>
+
+## Changes
+- Added IDP project:
+    ```
+    cd src
+    dotnet new --install Duende.IdentityServer.Templates
+    dotnet new isempty -n Acaddemicts.IDP
+    ```

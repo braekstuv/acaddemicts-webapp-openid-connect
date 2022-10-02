@@ -1,4 +1,4 @@
-# Image Gallery App - Added IDP Project
+# Image Gallery App - Added IDP UI
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -17,9 +17,45 @@ This application is the base from which we will start constructing and consuming
 ✅ The only positive point is that we're running over https <br/>
 
 ## Changes
-- Added IDP project:
+- Added IDP UI:
     ```
-    cd src
-    dotnet new --install Duende.IdentityServer.Templates
-    dotnet new isempty -n Acaddemicts.IDP
+    cd src/Acaddemicts.IDP
+    dotnet new isui
+    ```
+- Changed IDP `HostingExtensions.cs`:
+    ```csharp
+    public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddRazorPages();
+
+        builder.Services.AddIdentityServer(options =>
+            {
+                options.EmitStaticAudienceClaim = true;
+            })
+            .AddInMemoryIdentityResources(Config.IdentityResources)
+            .AddInMemoryApiScopes(Config.ApiScopes)
+            .AddInMemoryClients(Config.Clients);
+
+        return builder.Build();
+    }
+
+    public static WebApplication ConfigurePipeline(this WebApplication app)
+    {
+        app.UseSerilogRequestLogging();
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+
+        app.UseStaticFiles();
+        app.UseRouting();
+
+        app.UseIdentityServer();
+
+        app.UseAuthorization();
+        app.MapRazorPages().RequireAuthorization();
+
+        return app;
+    }
     ```

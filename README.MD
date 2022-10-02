@@ -1,4 +1,4 @@
-# Image Gallery App - Added IDP UI
+# Image Gallery App - Changed TestUsers
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -17,45 +17,46 @@ This application is the base from which we will start constructing and consuming
 ✅ The only positive point is that we're running over https <br/>
 
 ## Changes
-- Added IDP UI:
+- Changed IDP `TestUsers.cs`:
+    ```csharp
+    public static List<TestUser> Users = new List<TestUser>
+    {
+        new TestUser{
+            SubjectId = "b6f7a7b1-f403-4434-8dac-8495ddd1f36e",
+            Username = "Frank",
+            Password = "password",
+            Claims = new List<Claim>{
+                new Claim("given_name", "Frank"),
+                new Claim("family_name", "Underwood")
+            }
+        },
+        new TestUser{
+            SubjectId = "b99748a7-ee9c-4e05-8c71-784dda2d2e87",
+            Username = "Claire",
+            Password = "password",
+            Claims = new List<Claim>{
+                new Claim("given_name", "Claire"),
+                new Claim("family_name", "Underwood")
+            }
+        },
+    };
     ```
-    cd src/Acaddemicts.IDP
-    dotnet new isui
-    ```
-- Changed IDP `HostingExtensions.cs`:
+- Add Testusers to `IDP Services`:
     ```csharp
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddRazorPages();
-
-        builder.Services.AddIdentityServer(options =>
-            {
-                options.EmitStaticAudienceClaim = true;
-            })
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients);
-
-        return builder.Build();
+        ...
+        .AddInMemoryClients(Config.Clients)
+        .AddTestUsers(TestUsers.Users);
+        ...
     }
-
-    public static WebApplication ConfigurePipeline(this WebApplication app)
+    ```
+- Add Profile to `Config.IdentityResources`:
+    ```csharp
+    public static IEnumerable<IdentityResource> IdentityResources =>
+    new IdentityResource[]
     {
-        app.UseSerilogRequestLogging();
-
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-
-        app.UseStaticFiles();
-        app.UseRouting();
-
-        app.UseIdentityServer();
-
-        app.UseAuthorization();
-        app.MapRazorPages().RequireAuthorization();
-
-        return app;
-    }
+        new IdentityResources.OpenId(),
+        new IdentityResources.Profile()
+    };
     ```

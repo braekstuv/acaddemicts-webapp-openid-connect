@@ -1,4 +1,4 @@
-# Image Gallery App - Added PKCE Protection
+# Image Gallery App - Logout from application
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -12,13 +12,9 @@ This application is the base from which we will start constructing and consuming
 
 ## The application in the current state
 ✅ We need to login to the application <br/>
-❌ We cannot logout from the application <br/>
+❌ We cannot logout from the application (We're still logged in to the IDP) <br/>
 ❌ Our profile information isn't available <br/>
 ✅ PKCE is enabled<br/>
 ❌ We are able to see images of all the users <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>
 ✅ We're running over https <br/>
-
-## Changes
-- Set `RequiredPkce = true` in our IDP Client
-- Set `options.UsePkce = false` in the Client's `ConfigureServices` method

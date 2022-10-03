@@ -1,4 +1,4 @@
-# Image Gallery App - Added Client to IDP
+# Image Gallery App - Added OIDC to ImageGallery.Client
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -11,33 +11,71 @@ This application is the base from which we will start constructing and consuming
 - Set both `ImageGallery.API` and `ImageGallery.Client` as startup projects
 
 ## The application in the current state
-❌ We don't need to log in, so the application doesn't know our identity <br/>
+✅ We need to login to the application <br/>
+❌ We cannot logout from the application <br/>
+❌ Our profile information isn't available <br/>
+❌ PKCE isn't enabled<br/>
 ❌ We are able to see images of all the users <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>
-✅ The only positive point is that we're running over https <br/>
+✅ We're running over https <br/>
 
 ## Changes
-- Added to `Config.Clients`:
+- Added to `ImageGallery Client Services`:
     ```csharp
-    new()
-    {
-        ClientName = "ImageGallery",
-        ClientId = "imagegalleryclient",
-        AllowedGrantTypes = GrantTypes.Code,
-        RequirePcke = false,
-        RedirectUris = new List<string>()
+        builder.Services.AddAuthentication(options =>
         {
-            "https://localhost:44389/signin-oidc"
-        },
-        AllowedScopes =
+            // the default scheme should be unique for every app on the same domain,
+            // so taht cookies don't interfere with eachother
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+        })
+        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
         {
-            IdentityServerConstants.StandardScopes.OpenId,
-            IdentityServerConstants.StandardScopes.Profile
-        },
-        ClientSecrets =
-        {
-            new Secret("secret".Sha256())
-        },
-        RequireConsent = true
-    }
+            options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.Authority = "https://localhost:5001";
+            options.ClientId = "imagegalleryclient";
+            options.ResponseType = "code";
+            options.UsePkce = false;
+            //options.CallbackPath = new PathString("...");
+            options.Scope.Add("openid");
+            options.Scope.Add("profile");
+            options.SaveTokens = true;
+            options.ClientSecret = "secret";
+        });
     ```
+- Added to `Program.cs`:
+  ```
+  ...
+  app.UseRouting();
+
+  app.UseAuthentication();
+  app.UseAuthorization();
+  ...
+  ```
+- Decorated `GalleryController` with `[Authorize]` attribute
+- Added to `GalleryController`:
+  ```csharp
+  public async Task WriteOutIdentityInformation()
+  {
+      // get the saved identity token
+      var identityToken = await HttpContext
+          .GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+
+      // write it out
+      Debug.WriteLine($"Identity token: {identityToken}");
+
+     //write out the user claims
+     foreach (var claim in User.Claims)
+     {
+         Debug.WriteLine($"Claim Type: {claim.Type} - Claim value: {claim.Value}");
+     }
+  }
+  ```
+- Added to `GalleryController.Index`:
+  ```csharp
+  public async Task<IActionResult> Index()
+  {
+    await WriteOutIdentityInformation();
+    ...
+  ```

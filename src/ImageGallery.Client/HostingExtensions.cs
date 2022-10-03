@@ -33,7 +33,7 @@ public static class HostingExtensions
             options.Authority = "https://localhost:5001";
             options.ClientId = "imagegalleryclient";
             options.ResponseType = "code";
-            options.UsePkce = false;
+            options.UsePkce = true; //set to true by default
             //options.CallbackPath = new PathString("...");
             options.Scope.Add("openid");
             options.Scope.Add("profile");

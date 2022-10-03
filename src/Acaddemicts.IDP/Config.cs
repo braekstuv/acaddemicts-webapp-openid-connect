@@ -24,7 +24,7 @@ public static class Config
                     ClientName = "ImageGallery",
                     ClientId = "imagegalleryclient",
                     AllowedGrantTypes = GrantTypes.Code,
-                    RequirePkce = false,
+                    RequirePkce = true, // set to true by default
                     RedirectUris = new List<string>()
                     {
                         "https://localhost:44389/signin-oidc"

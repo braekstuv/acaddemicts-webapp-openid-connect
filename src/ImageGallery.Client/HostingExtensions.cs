@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
 
@@ -37,13 +38,9 @@ public static class HostingExtensions
             options.Authority = "https://localhost:5001";
             options.ClientId = "imagegalleryclient";
             options.ResponseType = "code";
-            options.UsePkce = true; //set to true by default
-            //options.CallbackPath = new PathString("...");
-            options.SignedOutCallbackPath = "/signout-callback-oidc"; // by default
-            options.Scope.Add("openid");
-            options.Scope.Add("profile");
-            //example: will remove the default filtering of the nbf claim
-            //options.ClaimActions.Remove("nbf"); 
+            //Removed duplicate code. For more info, see:
+            // https://github.com/dotnet/aspnetcore/blob/3ea008c80d5cc63de7f90ddfd6823b7b006251ff/src/Security/Authentication/OpenIdConnect/src/OpenIdConnectOptions.cs
+            options.Scope.Add("address");
             options.ClaimActions.DeleteClaim("sid");
             options.ClaimActions.DeleteClaim("idp");
             options.ClaimActions.DeleteClaim("s_hash");

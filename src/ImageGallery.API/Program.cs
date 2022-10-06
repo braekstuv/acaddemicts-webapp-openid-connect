@@ -1,6 +1,8 @@
+using System.IdentityModel.Tokens.Jwt;
 using ImageGallery.API;
 
 var builder = WebApplication.CreateBuilder(args);
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 // Add services to the container.
 builder.ConfigureServices();

@@ -1,4 +1,4 @@
-# Image Gallery App - Redirect to AccessDenied page if Api returns Unauthorized or Forbidden
+# Image Gallery App - Implemented GetImages for logged in user
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -19,6 +19,7 @@ This application is the base from which we will start constructing and consuming
 ✅ Only Paying users are able to access The Order Frame page (by button or direct URI) <br/>
 ✅ Our API is secured <br/>
 ✅ Our Client Successfully passes the bearertoken to our API<br/>
-❌ We are able to see images of all the users <br/>
+✅ We are only able to see the images of the user that's logged in <br/>
+❌ We can still get remove or edit individual images that do not belong to us <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>
 ✅ We're running over https <br/>

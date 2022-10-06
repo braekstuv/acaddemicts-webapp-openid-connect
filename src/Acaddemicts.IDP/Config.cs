@@ -14,12 +14,20 @@ public static class Config
             new IdentityResource(
                 "roles",
                 "Your role(s)",
-                new[] { "role" })
+                new[] { "role" }),
+            new IdentityResource(
+                "country",
+                "The country you're living in",
+                new[] { "country" }),
+            new IdentityResource(
+                "subscriptionlevel",
+                "Your subscription level",
+                new[] { "subscriptionlevel" })
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
-            { 
+            {
                 new ApiScope("imagegalleryapi")
             };
 
@@ -27,7 +35,7 @@ public static class Config
     new ApiResource[]
         {
                 new ApiResource(
-                    "imagegalleryapi", 
+                    "imagegalleryapi",
                     "Image Gallery Api",
                     new[] { "role" })
                 {
@@ -60,7 +68,9 @@ public static class Config
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Address,
                         "roles",
-                        "imagegalleryapi"
+                        "imagegalleryapi",
+                        "country",
+                        "subscriptionlevel"
                     },
                     ClientSecrets =
                     {

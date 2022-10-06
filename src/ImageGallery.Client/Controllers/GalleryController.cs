@@ -147,7 +147,7 @@ public class GalleryController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [Authorize(Roles = "PayingUser")]
+    //[Authorize(Roles = "PayingUser")]
     public async Task<IActionResult> AddImage(AddImageViewModel addImageViewModel)
     {
         if (!ModelState.IsValid)
@@ -194,7 +194,7 @@ public class GalleryController : Controller
         return RedirectToAction("Index");
     }
 
-    [Authorize(Roles = "PayingUser")]
+    [Authorize(Policy = "CanOrderFrame")]
     public async Task<IActionResult> OrderFrame()
     {
         var idpClient = _httpClientFactory.CreateClient("IDPClient");

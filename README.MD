@@ -1,4 +1,4 @@
-# Image Gallery App - Add PayingUser role to AddImage call on the API
+# Image Gallery App - Replaced Role-based Authorization with Policy-based authorization
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?

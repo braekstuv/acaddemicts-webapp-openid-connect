@@ -1,4 +1,4 @@
-# Image Gallery App - Added Custom Access Denied page
+# Image Gallery App - Securing our API (Breaks functionality)
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -17,6 +17,8 @@ This application is the base from which we will start constructing and consuming
 ✅ Our profile info is retrieved via the UserInfo endpoint <br/>
 ✅ PKCE is enabled <br/>
 ✅ Only Paying users are able to access The Order Frame page (by button or direct URI) <br/>
+✅ Our API is secured <br/>
+❌ After logging in, we get a 401 when calling the API<br/>
 ❌ We are able to see images of all the users <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>
 ✅ We're running over https <br/>

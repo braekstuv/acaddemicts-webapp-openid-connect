@@ -55,6 +55,7 @@ public static class HostingExtensions
             // https://github.com/dotnet/aspnetcore/blob/3ea008c80d5cc63de7f90ddfd6823b7b006251ff/src/Security/Authentication/OpenIdConnect/src/OpenIdConnectOptions.cs
             options.Scope.Add("address");
             options.Scope.Add("roles");
+            options.Scope.Add("imagegalleryapi");
             options.ClaimActions.DeleteClaim("sid");
             options.ClaimActions.DeleteClaim("idp");
             options.ClaimActions.DeleteClaim("s_hash");

@@ -10,10 +10,11 @@ internal static class HostingExtensions
 
         builder.Services.AddIdentityServer(options =>
             {
-                options.EmitStaticAudienceClaim = true;
+                options.EmitStaticAudienceClaim = false;
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
+            .AddInMemoryApiResources(Config.ApiResources)
             .AddInMemoryClients(Config.Clients)
             .AddTestUsers(TestUsers.Users);
 

@@ -19,7 +19,18 @@ public static class Config
 
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
-            { };
+            { 
+                new ApiScope("imagegalleryapi")
+            };
+
+    public static IEnumerable<ApiResource> ApiResources =>
+    new ApiResource[]
+        {
+                new ApiResource("imagegalleryapi", "Image Gallery Api")
+                {
+                    Scopes = { "imagegalleryapi" }
+                }
+        };
 
     public static IEnumerable<Client> Clients =>
         new Client[]
@@ -45,13 +56,14 @@ public static class Config
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Address,
-                        "roles"
+                        "roles",
+                        "imagegalleryapi"
                     },
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
-                    RequireConsent = true
+                    RequireConsent = true,
                 }
             };
 }

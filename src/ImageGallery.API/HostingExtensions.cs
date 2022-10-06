@@ -1,6 +1,7 @@
 using AutoMapper;
 using ImageGallery.API.Entities;
 using ImageGallery.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 
@@ -12,6 +13,16 @@ public static class HostingExtensions
     {
         builder.Services.AddControllers()
          .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.Authority = "https://localhost:5001";
+                options.Audience = "imagegalleryapi";
+
+                // it's recommended to check the type header to avoid "JWT confusion" attacks
+                options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
+            });
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

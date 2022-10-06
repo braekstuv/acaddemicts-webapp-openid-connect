@@ -23,6 +23,8 @@ public static class Config
                 {
                     ClientName = "ImageGallery",
                     ClientId = "imagegalleryclient",
+                    // Avoid setting this to true, we'd rather get the claims from the userinfo endpoint 
+                    //AlwaysIncludeUserClaimsInIdToken = true, 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true, // set to true by default
                     RedirectUris = new List<string>()

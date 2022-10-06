@@ -1,4 +1,4 @@
-# Image Gallery App - Implement redirect after logout
+# Image Gallery App - Implement UserInfo endpoint
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -14,7 +14,7 @@ This application is the base from which we will start constructing and consuming
 ✅ We need to login to the application <br/>
 ✅ We can logout from the application (including the idp) <br/>
 ✅ We're redirected back to the application after logout <br/>
-❌ Our profile information isn't available <br/>
+✅ Our profile info is retrieved via the UserInfo endpoint <br/>
 ✅ PKCE is enabled <br/>
 ❌ We are able to see images of all the users <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>

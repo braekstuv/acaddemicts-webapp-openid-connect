@@ -1,4 +1,4 @@
-# Image Gallery App - Authorizing OrderFrame Action for Paying Users only
+# Image Gallery App - Added Custom Access Denied page
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?

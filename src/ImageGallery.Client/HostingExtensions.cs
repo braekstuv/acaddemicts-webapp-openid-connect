@@ -35,6 +35,7 @@ public static class HostingExtensions
             options.ResponseType = "code";
             options.UsePkce = true; //set to true by default
             //options.CallbackPath = new PathString("...");
+            options.SignedOutCallbackPath = "/signout-callback-oidc"; // by default
             options.Scope.Add("openid");
             options.Scope.Add("profile");
             options.SaveTokens = true;

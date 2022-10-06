@@ -1,4 +1,4 @@
-# Image Gallery App - Logout from IDP
+# Image Gallery App - Implement redirect after logout
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -13,7 +13,7 @@ This application is the base from which we will start constructing and consuming
 ## The application in the current state
 ✅ We need to login to the application <br/>
 ✅ We can logout from the application (including the idp) <br/>
-❌ We're not redirected back to the application after logout <br/>
+✅ We're redirected back to the application after logout <br/>
 ❌ Our profile information isn't available <br/>
 ✅ PKCE is enabled <br/>
 ❌ We are able to see images of all the users <br/>

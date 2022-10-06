@@ -1,4 +1,4 @@
-# Image Gallery App - Prevent transformation of Claim Types
+# Image Gallery App - Remove unnecessary claims from ClaimsIdentity
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?

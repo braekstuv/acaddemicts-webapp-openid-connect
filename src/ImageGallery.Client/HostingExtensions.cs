@@ -22,6 +22,14 @@ public static class HostingExtensions
             client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
         });
 
+        // create an HttpClient used for accessing the IDP
+        builder.Services.AddHttpClient("IDPClient", client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:5001/");
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+        });
+
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // Will prevent unwanted mapping of claimtypes
 
         builder.Services.AddAuthentication(options =>

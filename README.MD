@@ -1,4 +1,4 @@
-# Image Gallery App - Adding address scope to userinfo, but omit it from claimsidentity
+# Image Gallery App - Added OrderFrame Action, which gets the address by calling the UserInfo Endpoint
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?

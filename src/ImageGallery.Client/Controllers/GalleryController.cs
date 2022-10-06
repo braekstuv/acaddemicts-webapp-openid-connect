@@ -35,15 +35,21 @@ public class GalleryController : Controller
         var response = await httpClient.SendAsync(
             request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
 
-        response.EnsureSuccessStatusCode();
-
-        using (var responseStream = await response.Content.ReadAsStreamAsync())
+        if (response.IsSuccessStatusCode)
         {
-            return View(new GalleryIndexViewModel(
-                await JsonSerializer.DeserializeAsync<List<Image>>(responseStream)));
+            using (var responseStream = await response.Content.ReadAsStreamAsync())
+            {
+                return View(new GalleryIndexViewModel(
+                    await JsonSerializer.DeserializeAsync<List<Image>>(responseStream)));
+            }
+        }
+        else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized ||
+            response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+        {
+            return RedirectToAction("AccessDenied", "Authorization");
         }
 
-        return View(new GalleryIndexViewModel(new List<Image>()));
+        throw new Exception("Problem accessing the API");
     }
 
     public async Task Logout()

@@ -1,4 +1,4 @@
-# Image Gallery App - Passing the bearertoken from Client to the API
+# Image Gallery App - Redirect to AccessDenied page if Api returns Unauthorized or Forbidden
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?

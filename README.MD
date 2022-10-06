@@ -1,4 +1,4 @@
-# Image Gallery App - Securing our API (Breaks functionality)
+# Image Gallery App - Passing the bearertoken from Client to the API
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -18,7 +18,7 @@ This application is the base from which we will start constructing and consuming
 ✅ PKCE is enabled <br/>
 ✅ Only Paying users are able to access The Order Frame page (by button or direct URI) <br/>
 ✅ Our API is secured <br/>
-❌ After logging in, we get a 401 when calling the API<br/>
+✅ Our Client Successfully passes the bearertoken to our API<br/>
 ❌ We are able to see images of all the users <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>
 ✅ We're running over https <br/>

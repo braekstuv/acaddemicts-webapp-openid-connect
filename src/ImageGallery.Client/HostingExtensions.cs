@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using IdentityModel;
+using ImageGallery.Client.HttpHandlers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
@@ -16,13 +17,17 @@ public static class HostingExtensions
         builder.Services.AddControllersWithViews()
              .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
 
+        builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddTransient<BearerTokenHandler>();
+
         // create an HttpClient used for accessing the API
         builder.Services.AddHttpClient("APIClient", client =>
         {
             client.BaseAddress = new Uri("https://localhost:44366/");
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
-        });
+        }).AddHttpMessageHandler<BearerTokenHandler>();
 
         // create an HttpClient used for accessing the IDP
         builder.Services.AddHttpClient("IDPClient", client =>

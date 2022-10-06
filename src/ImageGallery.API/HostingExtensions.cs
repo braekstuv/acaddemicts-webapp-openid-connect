@@ -3,6 +3,7 @@ using ImageGallery.API.Entities;
 using ImageGallery.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 
 namespace ImageGallery.API;
@@ -21,6 +22,11 @@ public static class HostingExtensions
                 options.Audience = "imagegalleryapi";
 
                 // it's recommended to check the type header to avoid "JWT confusion" attacks
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    RoleClaimType = "role"
+                };
+
                 options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
             });
 

@@ -59,6 +59,7 @@ public class ImagesController : ControllerBase
     }
 
     [HttpPost()]
+    [Authorize(Roles = "PayingUser")]
     public IActionResult CreateImage([FromBody] ImageForCreation imageForCreation)
     {
         // Automapper maps only the Title in our configuration
@@ -85,7 +86,7 @@ public class ImagesController : ControllerBase
 
         // ownerId should be set - can't save image in starter solution, will
         // be fixed during the course
-        //imageEntity.OwnerId = ...;
+        imageEntity.OwnerId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
 
         // add and save.
         _galleryRepository.AddImage(imageEntity);

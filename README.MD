@@ -1,4 +1,4 @@
-# Image Gallery App - Adding FreeUser and PayingUser roles
+# Image Gallery App - Only show the OrderFrame Button for Free Users
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -16,6 +16,8 @@ This application is the base from which we will start constructing and consuming
 ✅ We're redirected back to the application after logout <br/>
 ✅ Our profile info is retrieved via the UserInfo endpoint <br/>
 ✅ PKCE is enabled <br/>
+✅ Only PayingUsers can see the OrderFrame Button <br/>
+❌ Other Users can still access the OrderFrame page by URI <br/>
 ❌ We are able to see images of all the users <br/>
 ❌ We aren't able to upload images, as our identity isn't known <br/>
 ✅ We're running over https <br/>

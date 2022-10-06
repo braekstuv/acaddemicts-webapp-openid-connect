@@ -1,4 +1,4 @@
-# Image Gallery App - Replaced Role-based Authorization with Policy-based authorization
+# Image Gallery App - Adding MustOwnImage policy
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?
@@ -20,6 +20,6 @@ This application is the base from which we will start constructing and consuming
 ✅ Our API is secured <br/>
 ✅ Our Client Successfully passes the bearertoken to our API<br/>
 ✅ We are only able to see the images of the user that's logged in <br/>
-❌ We can still get remove or edit individual images that do not belong to us <br/>
+✅ We cannot get, remove or edit individual images that do not belong to us <br/>
 ✅ We aren't able to upload images, as our identity isn't known <br/>
 ✅ We're running over https <br/>

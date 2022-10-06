@@ -186,6 +186,7 @@ public class GalleryController : Controller
         return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "PayingUser")]
     public async Task<IActionResult> OrderFrame()
     {
         var idpClient = _httpClientFactory.CreateClient("IDPClient");

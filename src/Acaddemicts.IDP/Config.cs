@@ -10,7 +10,11 @@ public static class Config
         {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
-            new IdentityResources.Address()
+            new IdentityResources.Address(),
+            new IdentityResource(
+                "roles",
+                "Your role(s)",
+                new[] { "role" })
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
@@ -41,6 +45,7 @@ public static class Config
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Address,
+                        "roles"
                     },
                     ClientSecrets =
                     {

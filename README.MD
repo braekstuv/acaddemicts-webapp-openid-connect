@@ -1,4 +1,4 @@
-# Image Gallery App - Added OrderFrame Action, which gets the address by calling the UserInfo Endpoint
+# Image Gallery App - Adding FreeUser and PayingUser roles
 This application is the base from which we will start constructing and consuming our identity provider.
 
 ## How to run?

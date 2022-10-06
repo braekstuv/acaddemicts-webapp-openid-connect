@@ -49,10 +49,12 @@ public static class HostingExtensions
             //Removed duplicate code. For more info, see:
             // https://github.com/dotnet/aspnetcore/blob/3ea008c80d5cc63de7f90ddfd6823b7b006251ff/src/Security/Authentication/OpenIdConnect/src/OpenIdConnectOptions.cs
             options.Scope.Add("address");
+            options.Scope.Add("roles");
             options.ClaimActions.DeleteClaim("sid");
             options.ClaimActions.DeleteClaim("idp");
             options.ClaimActions.DeleteClaim("s_hash");
             options.ClaimActions.DeleteClaim("auth_time");
+            options.ClaimActions.MapUniqueJsonKey("role", "role");
             options.SaveTokens = true;
             options.ClientSecret = "secret";
             options.GetClaimsFromUserInfoEndpoint = true;
